@@ -11,6 +11,14 @@ export default function HomePage() {
       {/* Hero content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <HeroAnimation>
+          {/* TEMPORARY: Under construction banner - SAFE TO REMOVE LATER */}
+          <div className="mb-6 inline-block px-6 py-2 bg-yellow-100 dark:bg-yellow-900/30 border-2 border-yellow-400 dark:border-yellow-600 rounded-lg">
+            <p className="text-sm font-semibold text-yellow-800 dark:text-yellow-200">
+              🚧 Under Construction - Some features are still being refined
+            </p>
+          </div>
+          {/* END TEMPORARY SECTION */}
+
           <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 tracking-wide uppercase">
             Welcome to my portfolio
           </p>
