@@ -159,19 +159,6 @@ Built with accessibility in mind:
 
 ---
 
-## 🐛 Troubleshooting
-
-| Issue | Solution |
-|-------|----------|
-| Images not loading | Ensure path starts with `/` and file is in `public/` |
-| Styles not updating | Restart dev server or hard refresh (Ctrl+Shift+R) |
-| Dark mode flashing | Check `suppressHydrationWarning` on `<html>` tag |
-| Contact form 422 | Validation failed—verify email format & field lengths |
-| Rate limit (429) | Wait 10 minutes or restart dev server |
-| Build errors | Run `npm install` and check TypeScript errors with `npm run type-check` |
-
----
-
 ## 🤝 Let's Connect
 
 I'm always interested in new collaborations, creative projects, and meaningful conversations.
@@ -199,8 +186,6 @@ This portfolio was built with inspiration from the developer community and power
 - [Vercel](https://vercel.com) — Seamless deployment and hosting
 - [Tailwind CSS](https://tailwindcss.com) — Utility-first CSS framework
 - [Framer Motion](https://www.framer.com/motion/) — Production-ready animations
-
-**Special thanks** to all open-source contributors whose work made this portfolio possible.
 
 ---
 
