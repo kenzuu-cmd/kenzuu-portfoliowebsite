@@ -2,6 +2,7 @@ import {
   forwardRef,
   type ElementType,
   type ComponentPropsWithoutRef,
+  type ComponentRef,
 } from 'react'
 
 type CardProps<T extends ElementType = 'div'> = {
@@ -19,7 +20,7 @@ type CardProps<T extends ElementType = 'div'> = {
   }
 >
 
-const Card = forwardRef<HTMLElement, CardProps>(
+const Card = forwardRef<ComponentRef<ElementType>, CardProps>(
   (
     {
       as: Component = 'div',
@@ -72,7 +73,7 @@ const Card = forwardRef<HTMLElement, CardProps>(
 
     return (
       <Component
-        ref={ref}
+        ref={ref as React.Ref<any>}
         className={combinedClasses}
         {...interactiveProps}
         {...props}
