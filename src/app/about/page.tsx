@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import * as Icons from 'lucide-react'
+import { LucideProps } from 'lucide-react'
 import SectionHeading from '@/components/SectionHeading'
 import { SocialLinks } from '@/components/SocialLinks'
 import { TechIcon } from '@/components/TechIcon'
@@ -9,8 +10,8 @@ import { fadeInUp, staggerContainer } from '@/lib/motion'
 import { aboutContent, techStack, personalInfo } from '@/lib/personal-info'
 
 // Helper for timeline Lucide icons
-const getIcon = (iconName: string) => {
-  const IconComponent = (Icons as Record<string, React.ComponentType>)[iconName]
+const getIcon = (iconName: string): React.ComponentType<LucideProps> => {
+  const IconComponent = (Icons as unknown as Record<string, React.ComponentType<LucideProps>>)[iconName]
   return IconComponent || Icons.Circle
 }
 
