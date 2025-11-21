@@ -105,7 +105,7 @@ export default function HomePage() {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 heroButtonGroup">
               <Link
                 href="/work"
                 className="btn-primary"
@@ -210,57 +210,32 @@ export default function HomePage() {
               aria-hidden="true"
             />
             
-            {/* 
-              Video and fallback wrapper - ensures consistent sizing
-            
-            Both the fallback poster image and video element share identical dimensions
-            to prevent visual jumps during loading. The wrapper enforces the exact size,
-            positioning, and transforms for both elements.
-            
-            ALPHA TRANSPARENCY VERIFICATION:
-            To verify alpha channel is working, temporarily set this div's background to #FF00FF (magenta).
-            If pink shows through transparent areas, alpha is working correctly.
-            If video has solid black background instead of transparency, re-encode with:
-            
-            ffmpeg -i input.mov -c:v libvpx-vp9 -pix_fmt yuva420p -b:v 0 -crf 32 -an output-alpha.webm
-            
-            Flags explained:
-            -c:v libvpx-vp9     VP9 codec with alpha support
-            -pix_fmt yuva420p   Pixel format with alpha channel (yuva420p, not yuv420p)
-            -b:v 0 -crf 32      Variable bitrate with quality level 32 (15-35 range, lower=better)
-            -an                 Strip audio track (not needed for background video)
-            
-            For best quality transparent WebM:
-            - Use CRF 25-30 for high quality
-            - Use CRF 31-35 for balanced quality/filesize
-            - Source should be ProRes 4444 or PNG sequence with alpha
-          */}
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            poster="/hero home page/hero page fallback.png"
-            aria-hidden="true"
-            className="heroAnimationVideo"
-            style={{
-              position: 'relative',
-              width: 'clamp(165%, 180% + 2vw, 195%)',
-              maxWidth: 'none',
-              height: 'auto',
-              minHeight: 'clamp(950px, 115vh, 1350px)',
-              objectFit: 'contain',
-              objectPosition: 'center bottom',
-              transform: 'translateX(clamp(-3%, 0%, 3%)) scale(1.23)',
-              transformOrigin: 'center bottom',
-              zIndex: 1,
-            }}
-          >
-            <source src="/hero home page/hero page animation.webm" type="video/webm" />
-            <source src="/hero home page/hero page animation.mp4" type="video/mp4" />
-          </video>
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              poster="/hero home page/hero page fallback.png"
+              aria-hidden="true"
+              className="heroAnimationVideo"
+              style={{
+                position: 'relative',
+                width: 'clamp(165%, 180% + 2vw, 195%)',
+                maxWidth: 'none',
+                height: 'auto',
+                minHeight: 'clamp(950px, 115vh, 1350px)',
+                objectFit: 'contain',
+                objectPosition: 'center bottom',
+                transform: 'translateX(clamp(-3%, 0%, 3%)) scale(1.23)',
+                transformOrigin: 'center bottom',
+                zIndex: 1,
+              }}
+            >
+              <source src="/hero home page/hero page animation.webm" type="video/webm" />
+              <source src="/hero home page/hero page animation.mp4" type="video/mp4" />
+            </video>
           </div>
         </HeroAnimation>
       </div>
@@ -380,138 +355,136 @@ export default function HomePage() {
           }
         }
         
-        /* Tablet Portrait & Large Mobile (600px - 767px): Stack vertically */
-        @media (min-width: 600px) and (max-width: 767px) {
+        /* Tablet & Mobile (≤960px): Video as background layer with content overlay */
+        @media (max-width: 960px) {
           .hero {
-            height: auto !important;
+            height: 100vh !important;
             min-height: 100vh !important;
-            align-items: flex-start !important;
-            padding-top: calc(var(--header-height) + 1.5rem) !important;
+            max-height: 100vh !important;
+            align-items: center !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            overflow: hidden !important;
           }
           
           .heroInner {
-            grid-template-columns: 1fr !important;
-            gap: 2.5rem !important;
-            padding-left: 2.5rem !important;
-            padding-right: 2.5rem !important;
-            height: auto !important;
-            padding-top: 2rem !important;
-            padding-bottom: 3rem !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 0 !important;
+            padding: 2.5rem 2rem !important;
+            height: 100% !important;
+            position: relative !important;
+            z-index: 10 !important;
           }
           
           .heroTextCol {
-            text-align: left !important;
-            align-items: flex-start !important;
+            text-align: center !important;
+            align-items: center !important;
+            z-index: 30 !important;
+            position: relative !important;
+            max-width: 640px !important;
           }
           
-          .heroAnimation {
-            grid-column: 1 !important;
+          /* Center buttons on mobile/tablet */
+          .heroButtonGroup {
             justify-content: center !important;
-            align-items: flex-end !important;
-            height: clamp(500px, 60vh, 600px) !important;
-            margin-left: 0 !important;
-            margin-bottom: clamp(-5rem, -8vh, -6rem) !important;
+            width: 100% !important;
+          }
+          
+          /* Video becomes absolute positioned full-screen background */
+          .heroAnimation {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            overflow: hidden !important;
+            z-index: 1 !important;
+            margin: 0 !important;
+            max-width: none !important;
+            grid-column: unset !important;
+            pointer-events: none !important;
           }
           
           .heroAnimationVideo {
-            width: 115% !important;
-            min-height: clamp(500px, 60vh, 600px) !important;
-            transform: translateX(0) !important;
-            object-position: center bottom !important;
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: none !important;
+            min-height: 100vh !important;
+            object-fit: cover !important;
+            object-position: center !important;
+            opacity: 0.35 !important;
+            filter: none !important;
+          }
+          
+          /* Hide backdrop on mobile/tablet */
+          .heroAnimationBackdrop {
+            display: none !important;
           }
         }
         
-        /* Mobile (480px - 599px): Compact stacked layout */
-        @media (min-width: 480px) and (max-width: 599px) {
-          .hero {
-            height: auto !important;
-            min-height: 100vh !important;
-            align-items: flex-start !important;
-            padding-top: calc(var(--header-height) + 1.5rem) !important;
-          }
-          
+        /* Tablet Landscape (768px - 960px): Slightly larger text */
+        @media (min-width: 768px) and (max-width: 960px) {
           .heroInner {
-            grid-template-columns: 1fr !important;
-            gap: 2rem !important;
-            padding-left: 2rem !important;
-            padding-right: 2rem !important;
-            height: auto !important;
-            padding-top: 1.5rem !important;
-            padding-bottom: 2.5rem !important;
+            padding: 3rem 2.5rem !important;
           }
           
           .heroTextCol {
-            gap: clamp(0.75rem, 1.5vh, 1rem) !important;
-          }
-          
-          .heroAnimation {
-            grid-column: 1 !important;
-            justify-content: center !important;
-            align-items: flex-end !important;
-            height: clamp(450px, 55vh, 550px) !important;
-            margin-left: 0 !important;
-            margin-bottom: clamp(-4rem, -7vh, -5rem) !important;
-          }
-          
-          .heroAnimationVideo {
-            width: 110% !important;
-            min-height: clamp(450px, 55vh, 550px) !important;
-            transform: translateX(0) !important;
-            object-position: center bottom !important;
+            max-width: 700px !important;
           }
           
           .heroTitle {
-            font-size: clamp(2.4rem, 9vw, 3.2rem) !important;
+            font-size: clamp(2.8rem, 7vw, 3.8rem) !important;
           }
         }
-
-        /* Small Mobile (<480px): Minimal compact layout */
-        @media (max-width: 479px) {
-          .hero {
-            height: auto !important;
-            min-height: 100vh !important;
-            align-items: flex-start !important;
-            padding-top: calc(var(--header-height) + 1rem) !important;
-          }
-          
+        
+        /* Mobile Landscape & Portrait (480px - 767px): Medium text */
+        @media (min-width: 480px) and (max-width: 767px) {
           .heroInner {
-            grid-template-columns: 1fr !important;
-            gap: 1.5rem !important;
-            padding-left: 1.5rem !important;
-            padding-right: 1.5rem !important;
-            height: auto !important;
-            padding-top: 1rem !important;
-            padding-bottom: 2rem !important;
+            padding: 2.5rem 2rem !important;
           }
           
           .heroTextCol {
-            gap: clamp(0.5rem, 1vh, 0.875rem) !important;
+            max-width: 580px !important;
           }
           
-          .heroAnimation {
-            grid-column: 1 !important;
-            justify-content: center !important;
-            align-items: flex-end !important;
-            height: clamp(400px, 50vh, 500px) !important;
-            margin-left: 0 !important;
-            margin-bottom: clamp(-3.5rem, -6vh, -4.5rem) !important;
+          .heroTitle {
+            font-size: clamp(2.4rem, 8vw, 3.2rem) !important;
           }
           
           .heroAnimationVideo {
-            width: 110% !important;
-            min-height: clamp(400px, 50vh, 500px) !important;
-            transform: translateX(0) !important;
-            object-position: center bottom !important;
+            opacity: 0.32 !important;
+          }
+        }
+
+        /* Small Mobile (<480px): Compact text */
+        @media (max-width: 479px) {
+          .heroInner {
+            padding: 2rem 1.5rem !important;
+          }
+          
+          .heroTextCol {
+            max-width: 100% !important;
+            gap: clamp(0.5rem, 1vh, 0.875rem) !important;
           }
           
           .heroTitle {
             font-size: clamp(2rem, 10vw, 2.8rem) !important;
           }
           
-          .heroAnimationBackdrop {
-            width: 85% !important;
-            height: 75% !important;
-            left: 7.5% !important;
+          .heroAnimationVideo {
+            opacity: 0.3 !important;
           }
         }
 
