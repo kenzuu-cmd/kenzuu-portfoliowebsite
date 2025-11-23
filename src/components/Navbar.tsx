@@ -257,10 +257,12 @@ export function Navbar() {
           exit={{ opacity: 0 }}
           transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
           onClick={closeMenu}
-          className="md:hidden fixed inset-0 bg-black/42 z-40"
+          className="md:hidden fixed inset-0 bg-black/42"
           style={{
             backdropFilter: 'blur(6px)',
             WebkitBackdropFilter: 'blur(6px)',
+            WebkitTapHighlightColor: 'transparent',
+            zIndex: 1100,
           }}
           aria-hidden="true"
         />
@@ -276,10 +278,12 @@ export function Navbar() {
         variants={shouldReduceMotion ? undefined : mobileMenuVariants}
         initial="closed"
         animate={isOpen ? 'open' : 'closed'}
-        className="md:hidden fixed inset-y-0 left-0 w-[min(320px,85vw)] bg-white dark:bg-neutral-950 shadow-[0_8px_30px_rgba(0,0,0,0.5)] z-50"
+        className="md:hidden fixed inset-y-0 left-0 w-[min(320px,85vw)] bg-white dark:bg-neutral-950 shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
         style={{
           willChange: isOpen ? 'transform' : 'auto',
           boxShadow: '0 8px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05)',
+          WebkitTapHighlightColor: 'transparent',
+          zIndex: 1200,
         }}
       >
         {/* Glass effect overlay for depth */}
@@ -290,6 +294,7 @@ export function Navbar() {
           <button
             onClick={closeMenu}
             className="absolute top-4 right-4 p-2 rounded-lg text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+            style={{ WebkitTapHighlightColor: 'transparent' }}
             aria-label="Close menu"
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -298,7 +303,7 @@ export function Navbar() {
           </button>
 
           <nav className="flex-1">
-            <ul className="space-y-2" role="list">
+            <ul className="space-y-7" role="list">
               {navLinks.map((link, i) => {
                 const isActive = pathname === link.href
                 const isFirst = i === 0
@@ -314,48 +319,23 @@ export function Navbar() {
                       href={link.href}
                       onClick={closeMenu}
                       className={`
-                        group relative flex items-center min-h-[44px] px-4 py-3.5
+                        group relative flex items-center min-h-[44px] px-4 py-3
                         text-lg font-medium transition-all duration-150
                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-neutral-950
-                        ${MENU_STYLE_VARIANT === 'accent-bar' 
-                          ? isActive
-                            ? 'text-brand-600 dark:text-brand-400 bg-brand-50/50 dark:bg-brand-950/30'
-                            : 'text-neutral-700 dark:text-neutral-300 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-neutral-50 dark:hover:bg-neutral-900/50'
-                          : isActive
-                            ? 'text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-950/50 rounded-xl border-2 border-brand-500 dark:border-brand-400'
-                            : 'text-neutral-700 dark:text-neutral-300 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-neutral-50 dark:hover:bg-neutral-900/50 rounded-xl'
+                        ${isActive
+                          ? 'text-brand-600 dark:text-brand-400'
+                          : 'text-neutral-700 dark:text-neutral-300 hover:text-brand-600 dark:hover:text-brand-400'
                         }
                       `}
                       style={{
-                        ...(MENU_STYLE_VARIANT === 'accent-bar' && isActive && {
-                          borderLeft: '5px solid var(--color-brand-600, #3768EF)',
-                          boxShadow: 'inset 2px 0 8px rgba(55, 104, 239, 0.15)',
+                        WebkitTapHighlightColor: 'transparent',
+                        ...(isActive && {
+                          borderLeft: '4px solid var(--color-brand-600, #3768EF)',
+                          paddingLeft: 'calc(1rem - 4px)',
                         }),
                       }}
-                      onMouseDown={(e) => {
-                        // Subtle press effect
-                        e.currentTarget.style.transform = 'scale(0.98)'
-                        setTimeout(() => {
-                          e.currentTarget.style.transform = 'scale(1)'
-                        }, 60)
-                      }}
                     >
-                      {/* Refined pill variant glow effect */}
-                      {MENU_STYLE_VARIANT === 'refined-pill' && isActive && (
-                        <div 
-                          className="absolute inset-0 rounded-xl opacity-50"
-                          style={{
-                            boxShadow: '0 0 20px rgba(55, 104, 239, 0.4)',
-                          }}
-                        />
-                      )}
-                      
-                      <span className="relative z-10">{link.label}</span>
-                      
-                      {/* Hover indicator for non-active items */}
-                      {!isActive && (
-                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-brand-500 dark:bg-brand-400 transform scale-y-0 group-hover:scale-y-100 transition-transform origin-center" />
-                      )}
+                      <span className="relative">{link.label}</span>
                     </Link>
                   </motion.li>
                 )
@@ -363,10 +343,10 @@ export function Navbar() {
             </ul>
           </nav>
 
-          {/* Optional: Menu footer with theme toggle */}
-          <div className="pt-4 mt-4 border-t border-neutral-200 dark:border-neutral-800">
-            <div className="flex items-center justify-between text-xs text-neutral-500 dark:text-neutral-400">
-              <span>Kenzuu Portfolio</span>
+          {/* Menu footer with theme toggle */}
+          <div className="pt-6 mt-6 border-t border-neutral-200 dark:border-neutral-800">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-neutral-500 dark:text-neutral-400">Kenzuu Portfolio</span>
               <ThemeToggle />
             </div>
           </div>
