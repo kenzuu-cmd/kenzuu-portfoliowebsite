@@ -167,11 +167,12 @@ export function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 transition-all duration-300 ${
         scrolled
           ? 'bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-sm'
           : 'bg-transparent'
       }`}
+      style={{ zIndex: 9999, isolation: 'isolate' }}
       aria-label="Main navigation"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -257,12 +258,13 @@ export function Navbar() {
           exit={{ opacity: 0 }}
           transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
           onClick={closeMenu}
-          className="md:hidden fixed inset-0 bg-black/42"
+          className="md:hidden fixed inset-0 bg-black/50"
           style={{
+            zIndex: 9998,
             backdropFilter: 'blur(6px)',
             WebkitBackdropFilter: 'blur(6px)',
             WebkitTapHighlightColor: 'transparent',
-            zIndex: 1100,
+            pointerEvents: 'auto',
           }}
           aria-hidden="true"
         />
@@ -280,10 +282,11 @@ export function Navbar() {
         animate={isOpen ? 'open' : 'closed'}
         className="md:hidden fixed inset-y-0 left-0 w-[min(320px,85vw)] bg-white dark:bg-neutral-950 shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
         style={{
+          zIndex: 9999,
           willChange: isOpen ? 'transform' : 'auto',
           boxShadow: '0 8px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05)',
           WebkitTapHighlightColor: 'transparent',
-          zIndex: 1200,
+          pointerEvents: 'auto',
         }}
       >
         {/* Glass effect overlay for depth */}
@@ -343,11 +346,10 @@ export function Navbar() {
             </ul>
           </nav>
 
-          {/* Menu footer with theme toggle */}
+          {/* Menu footer */}
           <div className="pt-6 mt-6 border-t border-neutral-200 dark:border-neutral-800">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-center">
               <span className="text-xs text-neutral-500 dark:text-neutral-400">Kenzuu Portfolio</span>
-              <ThemeToggle />
             </div>
           </div>
         </div>
