@@ -20,7 +20,8 @@ export function FigmaEmbed({ embedUrl, title, previewImage }: FigmaEmbedProps) {
 
   // Lazy load embed when it comes into view
   useEffect(() => {
-    if (!containerRef.current) return
+    const container = containerRef.current
+    if (!container) return
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -31,12 +32,10 @@ export function FigmaEmbed({ embedUrl, title, previewImage }: FigmaEmbedProps) {
       { rootMargin: '100px' } // Start loading 100px before it comes into view
     )
 
-    observer.observe(containerRef.current)
+    observer.observe(container)
 
     return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current)
-      }
+      observer.unobserve(container)
     }
   }, [showEmbed])
 

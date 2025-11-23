@@ -84,31 +84,11 @@
     0 4px 6px -4px rgb(0 0 0 / 0.3);
 }
 
-/* Light mode hero overrides */
-@media (prefers-color-scheme: light) {
-  :root:not(.dark) {
-    --color-bg: var(--hero-bg-light);
-    --color-text-primary: var(--hero-text-primary-light);
-    --color-text-muted: var(--hero-text-muted-light);
-  }
-}
-
-/* Hero section theme-aware background and text colors */
+/* Hero section theme-aware styles */
 .hero {
   background-color: var(--hero-bg-dark);
 }
 
-.light .hero {
-  background-color: var(--hero-bg-light);
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not(.dark) .hero {
-    background-color: var(--hero-bg-light);
-  }
-}
-
-/* Hero text colors - theme-aware */
 .heroTagline {
   color: var(--hero-text-muted-dark);
 }
@@ -117,21 +97,27 @@
   color: var(--hero-text-primary-dark);
 }
 
-.light .heroTagline {
+/* Light mode hero overrides */
+.light .hero,
+:root:not(.dark) .hero {
+  background-color: var(--hero-bg-light);
+}
+
+.light .heroTagline,
+:root:not(.dark) .heroTagline {
   color: var(--hero-text-muted-light);
 }
 
-.light .heroDescription {
+.light .heroDescription,
+:root:not(.dark) .heroDescription {
   color: var(--hero-text-primary-light);
 }
 
 @media (prefers-color-scheme: light) {
-  :root:not(.dark) .heroTagline {
-    color: var(--hero-text-muted-light);
-  }
-  
-  :root:not(.dark) .heroDescription {
-    color: var(--hero-text-primary-light);
+  :root:not(.dark) {
+    --color-bg: var(--hero-bg-light);
+    --color-text-primary: var(--hero-text-primary-light);
+    --color-text-muted: var(--hero-text-muted-light);
   }
 }
 
@@ -234,5 +220,15 @@
 
   .dark .shimmer::before {
     @apply via-white/5;
+  }
+
+  /* Hide scrollbar for horizontal scroll containers */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }

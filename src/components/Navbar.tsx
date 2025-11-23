@@ -7,9 +7,6 @@ import { motion, useReducedMotion, type Variants, AnimatePresence } from 'framer
 import { ThemeToggle } from './ThemeToggle'
 import { MobileMenuPortal } from './MobileMenuPortal'
 
-// Visual variant toggle: 'accent-bar' (Option A) or 'refined-pill' (Option B)
-const MENU_STYLE_VARIANT: 'accent-bar' | 'refined-pill' = 'accent-bar'
-
 const mobileMenuVariants: Variants = {
   closed: {
     x: '-100%',
@@ -86,7 +83,7 @@ const line3Variants: Variants = {
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/work', label: 'Work' },
-  { href: '/animations', label: 'Animations' },
+  { href: '/creations', label: 'Creations' },
   { href: '/music', label: 'Music' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },

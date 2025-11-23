@@ -7,7 +7,7 @@ Add your project screenshots here:
 - File naming: use kebab-case matching your project slugs
 - Example: ecommerce-platform.jpg, portfolio-website.png
 
-## Animations Directory (/public/animations/)
+## Animations Directory (/public/assets/creations/animations/)
 Add your animation GIFs here:
 - Format: GIF (optimized for web)
 - Max size: 2MB per file

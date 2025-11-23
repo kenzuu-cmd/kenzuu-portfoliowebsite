@@ -14,7 +14,7 @@ export const animations: Animation[] = [
     description:
       'Smooth facial expression transitions for anime characters using advanced interpolation techniques and custom shader effects.',
     technology: ['GLSL', 'Three.js', 'WebGL', 'Canvas API'],
-    previewGif: '/animations/character-morphing.svg',
+    previewGif: '/assets/creations/animations/character-morphing.svg',
     codeSandboxUrl: 'https://codesandbox.io/s/morphing-character-faces-xyz123',
   },
   {
@@ -23,7 +23,7 @@ export const animations: Animation[] = [
     description:
       'Real-time audio-reactive particle system that creates stunning visual effects synchronized with music beats and frequency analysis.',
     technology: ['Web Audio API', 'Canvas 2D', 'JavaScript', 'FFT Analysis'],
-    previewGif: '/animations/music-visualizer.svg',
+    previewGif: '/assets/creations/animations/music-visualizer.svg',
     codeSandboxUrl: 'https://codesandbox.io/s/particle-music-visualizer-abc456',
   },
   {
@@ -37,7 +37,7 @@ export const animations: Animation[] = [
       'TypeScript',
       'CSS Custom Properties',
     ],
-    previewGif: '/animations/ui-transitions.svg',
+    previewGif: '/assets/creations/animations/ui-transitions.svg',
     codeSandboxUrl: 'https://codesandbox.io/s/fluid-ui-transitions-def789',
   },
   {
@@ -51,6 +51,6 @@ export const animations: Animation[] = [
       'Fragment Shaders',
       'Noise Functions',
     ],
-    previewGif: '/animations/wave-simulation.svg',
+    previewGif: '/assets/creations/animations/wave-simulation.svg',
   },
 ]

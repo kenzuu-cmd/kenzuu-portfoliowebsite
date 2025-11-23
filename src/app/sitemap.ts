@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/animations`,
+      url: `${baseUrl}/creations`,
       lastModified,
       changeFrequency: 'weekly' as const,
       priority: 0.8,
