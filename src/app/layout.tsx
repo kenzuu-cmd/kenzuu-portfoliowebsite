@@ -144,6 +144,8 @@ export default function RootLayout({
             <Footer />
           </div>
         </ThemeProvider>
+        {/* Portal container for mobile menu (rendered via React portal) */}
+        <div id="portal-root" />
       </body>
     </html>
   )

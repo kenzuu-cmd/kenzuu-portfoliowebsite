@@ -3,8 +3,9 @@
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
-import { motion, useReducedMotion, type Variants } from 'framer-motion'
+import { motion, useReducedMotion, type Variants, AnimatePresence } from 'framer-motion'
 import { ThemeToggle } from './ThemeToggle'
+import { MobileMenuPortal } from './MobileMenuPortal'
 
 // Visual variant toggle: 'accent-bar' (Option A) or 'refined-pill' (Option B)
 const MENU_STYLE_VARIANT: 'accent-bar' | 'refined-pill' = 'accent-bar'
@@ -250,45 +251,49 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Enhanced Backdrop with blur */}
-      {isOpen && (
-        <motion.div
-          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
-          onClick={closeMenu}
-          className="md:hidden fixed inset-0 bg-black/50"
-          style={{
-            zIndex: 9998,
-            backdropFilter: 'blur(6px)',
-            WebkitBackdropFilter: 'blur(6px)',
-            WebkitTapHighlightColor: 'transparent',
-            pointerEvents: 'auto',
-          }}
-          aria-hidden="true"
-        />
-      )}
+      {/* Mobile menu portal: renders backdrop and menu to document.body to escape page stacking contexts */}
+      <MobileMenuPortal>
+        <AnimatePresence>
+          {isOpen && (
+            <>
+              {/* Enhanced Backdrop with blur */}
+              <motion.div
+                initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
+                onClick={closeMenu}
+                className="md:hidden fixed inset-0 bg-black/50"
+                style={{
+                  zIndex: 99998,
+                  backdropFilter: 'blur(6px)',
+                  WebkitBackdropFilter: 'blur(6px)',
+                  WebkitTapHighlightColor: 'transparent',
+                  pointerEvents: 'auto',
+                }}
+                aria-hidden="true"
+              />
 
-      {/* Enhanced Mobile Navigation Panel */}
-      <motion.div
-        ref={mobileMenuRef}
-        id="mobile-menu"
-        role="navigation"
-        aria-label="Mobile navigation"
-        aria-modal="true"
-        variants={shouldReduceMotion ? undefined : mobileMenuVariants}
-        initial="closed"
-        animate={isOpen ? 'open' : 'closed'}
-        className="md:hidden fixed inset-y-0 left-0 w-[min(320px,85vw)] bg-white dark:bg-neutral-950 shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
-        style={{
-          zIndex: 9999,
-          willChange: isOpen ? 'transform' : 'auto',
-          boxShadow: '0 8px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05)',
-          WebkitTapHighlightColor: 'transparent',
-          pointerEvents: 'auto',
-        }}
-      >
+              {/* Enhanced Mobile Navigation Panel */}
+              <motion.div
+                ref={mobileMenuRef}
+                id="mobile-menu"
+                role="dialog"
+                aria-label="Mobile navigation"
+                aria-modal="true"
+                variants={shouldReduceMotion ? undefined : mobileMenuVariants}
+                initial="closed"
+                animate="open"
+                exit="closed"
+                className="md:hidden fixed inset-y-0 left-0 w-[min(320px,85vw)] bg-white dark:bg-neutral-950 shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
+                style={{
+                  zIndex: 99999,
+                  willChange: 'transform',
+                  boxShadow: '0 8px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05)',
+                  WebkitTapHighlightColor: 'transparent',
+                  pointerEvents: 'auto',
+                }}
+              >
         {/* Glass effect overlay for depth */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
 
@@ -353,7 +358,11 @@ export function Navbar() {
             </div>
           </div>
         </div>
-      </motion.div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+      </MobileMenuPortal>
     </nav>
   )
 }
