@@ -191,28 +191,28 @@ export function Navbar() {
           <div className="flex items-center space-x-4">
             <ThemeToggle />
 
-            {/* Mobile menu button */}
+            {/* Mobile menu button - Enhanced for small phones */}
             <motion.button
               variants={shouldReduceMotion ? undefined : hamburgerVariants}
               animate={isOpen ? 'open' : 'closed'}
               onClick={toggleMenu}
-              className="md:hidden relative h-9 w-9 rounded-md border border-neutral-200 bg-white p-2 shadow-sm transition-colors hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-900"
+              className="md:hidden relative min-h-[44px] min-w-[44px] h-11 w-11 rounded-lg border-2 border-neutral-200 bg-white/90 backdrop-blur-sm p-2 shadow-md transition-all hover:bg-neutral-50 hover:border-brand-500 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 dark:border-neutral-700 dark:bg-neutral-900/90 dark:hover:bg-neutral-800 dark:hover:border-brand-400 active:scale-95"
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
             >
-              <div className="flex flex-col justify-center items-center h-full space-y-1">
+              <div className="flex flex-col justify-center items-center h-full space-y-1.5">
                 <motion.span
                   variants={shouldReduceMotion ? undefined : lineVariants}
-                  className="block h-0.5 w-4 bg-neutral-800 dark:bg-neutral-200 origin-center"
+                  className="block h-0.5 w-5 bg-neutral-800 dark:bg-neutral-200 origin-center rounded-full"
                 />
                 <motion.span
                   variants={shouldReduceMotion ? undefined : line2Variants}
-                  className="block h-0.5 w-4 bg-neutral-800 dark:bg-neutral-200"
+                  className="block h-0.5 w-5 bg-neutral-800 dark:bg-neutral-200 rounded-full"
                 />
                 <motion.span
                   variants={shouldReduceMotion ? undefined : line3Variants}
-                  className="block h-0.5 w-4 bg-neutral-800 dark:bg-neutral-200 origin-center"
+                  className="block h-0.5 w-5 bg-neutral-800 dark:bg-neutral-200 origin-center rounded-full"
                 />
               </div>
             </motion.button>

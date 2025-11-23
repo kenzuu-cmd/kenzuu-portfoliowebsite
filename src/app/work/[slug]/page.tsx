@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { ExternalLink, Github, ArrowLeft, Calendar, Wrench } from 'lucide-react'
 import { getProject, projects } from '@/lib/projects'
 import { TagPill } from '@/components/ui/TagPill'
+import { FigmaEmbed } from '@/components/FigmaEmbed'
 import { motion } from 'framer-motion'
 
 interface ProjectPageProps {
@@ -235,32 +236,11 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7 }}
             >
-              <div className="space-y-6">
-                <h2 className="text-4xl font-bold text-neutral-900 dark:text-neutral-100">
-                  Interactive Prototype
-                </h2>
-                <div className="relative rounded-2xl overflow-hidden bg-neutral-100 dark:bg-neutral-900 shadow-2xl border border-neutral-200 dark:border-neutral-800">
-                  <div style={{ paddingBottom: '75%', position: 'relative', minHeight: '600px' }}>
-                    <iframe
-                      src={project.figmaEmbed}
-                      allowFullScreen
-                      title={`${project.title} Figma Prototype`}
-                      style={{ 
-                        border: 'none',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%'
-                      }}
-                      allow="clipboard-read; clipboard-write"
-                    />
-                  </div>
-                </div>
-                <p className="text-center text-neutral-600 dark:text-neutral-400">
-                  Interactive Figma prototype – Click and explore the design
-                </p>
-              </div>
+              <FigmaEmbed
+                embedUrl={project.figmaEmbed}
+                title={project.title}
+                previewImage={project.coverImage}
+              />
             </motion.section>
           )}
 
