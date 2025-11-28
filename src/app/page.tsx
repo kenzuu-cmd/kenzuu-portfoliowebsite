@@ -189,12 +189,14 @@ export default function HomePage() {
               display: 'flex',
               alignItems: 'flex-end',
               justifyContent: 'center',
-              height: 'calc(100vh - var(--header-height))',
+              /* Full viewport height minus header, capped at 1200px for ultra-large screens */
+              height: 'min(calc(100vh - var(--header-height)), 1200px)',
               overflow: 'visible',
               gridColumn: '2',
-              maxWidth: '120%',
-              marginLeft: 'clamp(-2rem, -4vw, -4rem)',
-              marginBottom: 'clamp(-12rem, -16vh, -14rem)',
+              /* Allow larger width but cap at 1100px to prevent overflow on 4K+ */
+              maxWidth: 'min(130%, 1100px)',
+              marginLeft: 'clamp(-2rem, -3vw, -4rem)',
+              marginBottom: 'clamp(-10rem, -14vh, -14rem)',
             }}
           >
             {/* Gradient backdrop behind animation - subtle white/blue glow */}
@@ -222,13 +224,17 @@ export default function HomePage() {
               className="heroAnimationVideo"
               style={{
                 position: 'relative',
-                width: 'clamp(165%, 180% + 2vw, 195%)',
-                maxWidth: 'none',
+                /* Larger width range but capped at 1400px to prevent overflow */
+                width: 'clamp(140%, 160% + 2vw, 180%)',
+                maxWidth: '1400px',
                 height: 'auto',
-                minHeight: 'clamp(950px, 115vh, 1350px)',
+                /* Larger height range, capped for ultra-large screens */
+                minHeight: 'clamp(700px, 100vh, 1100px)',
+                maxHeight: '1300px',
                 objectFit: 'contain',
                 objectPosition: 'center bottom',
-                transform: 'translateX(clamp(-3%, 0%, 3%)) scale(1.23)',
+                /* Larger scale to match your original intended size */
+                transform: 'translateX(clamp(-3%, -1%, 1%)) scale(1.18)',
                 transformOrigin: 'center bottom',
                 zIndex: 1,
               }}
@@ -272,7 +278,16 @@ export default function HomePage() {
           }
         }
 
-        /* Extra Large Desktops (1600px+): Maximum spacing and scale */
+        /* ============================================
+           BOUNDED RESPONSIVE VIDEO/ANIMATION SYSTEM
+           ============================================
+           Key principles:
+           1. Use max-width/max-height to cap at absolute pixel limits
+           2. This prevents overflow on 4K+ screens
+           3. But allows full size on normal screens (1080p-1440p)
+        */
+
+        /* Extra Large Desktops (1600px+): Cap at maximum bounds */
         @media (min-width: 1600px) {
           .heroInner {
             grid-template-columns: minmax(500px, 45%) minmax(0, 55%) !important;
@@ -281,17 +296,24 @@ export default function HomePage() {
           }
           
           .heroAnimation {
-            margin-left: clamp(-3rem, -5vw, -5rem) !important;
-            margin-bottom: clamp(-10rem, -15vh, -12rem) !important;
+            /* Larger container but capped for 4K screens */
+            max-width: min(130%, 1100px) !important;
+            height: min(calc(100vh - var(--header-height)), 1200px) !important;
+            margin-left: clamp(-2rem, -3vw, -4rem) !important;
+            margin-bottom: clamp(-10rem, -14vh, -14rem) !important;
           }
           
           .heroAnimationVideo {
-            width: clamp(155%, 170%, 185%) !important;
-            min-height: clamp(950px, 110vh, 1300px) !important;
+            /* Full size like your original, but with max caps */
+            width: clamp(140%, 160%, 180%) !important;
+            max-width: 1400px !important;
+            min-height: clamp(700px, 100vh, 1100px) !important;
+            max-height: 1300px !important;
+            transform: translateX(clamp(-3%, -1%, 1%)) scale(1.18) !important;
           }
         }
 
-        /* Large Desktop (1200px - 1599px): Optimal two-column layout */
+        /* Large Desktop (1200px - 1599px): Your intended size */
         @media (min-width: 1200px) and (max-width: 1599px) {
           .heroInner {
             grid-template-columns: minmax(440px, 46%) minmax(0, 54%) !important;
@@ -300,17 +322,22 @@ export default function HomePage() {
           }
           
           .heroAnimation {
-            margin-left: clamp(-2.5rem, -4.5vw, -4.5rem) !important;
-            margin-bottom: clamp(-9rem, -13vh, -11rem) !important;
+            max-width: min(125%, 1000px) !important;
+            height: min(calc(100vh - var(--header-height)), 1100px) !important;
+            margin-left: clamp(-2rem, -3vw, -4rem) !important;
+            margin-bottom: clamp(-10rem, -13vh, -13rem) !important;
           }
           
           .heroAnimationVideo {
-            width: clamp(150%, 165%, 180%) !important;
-            min-height: clamp(900px, 108vh, 1250px) !important;
+            width: clamp(145%, 165%, 180%) !important;
+            max-width: 1300px !important;
+            min-height: clamp(750px, 105vh, 1100px) !important;
+            max-height: 1200px !important;
+            transform: translateX(clamp(-3%, -1%, 1%)) scale(1.2) !important;
           }
         }
         
-        /* Standard Desktop (1024px - 1199px): Balanced proportions */
+        /* Standard Desktop (1024px - 1199px): Slightly reduced but still prominent */
         @media (min-width: 1024px) and (max-width: 1199px) {
           .heroInner {
             grid-template-columns: minmax(400px, 47%) minmax(0, 53%) !important;
@@ -320,17 +347,22 @@ export default function HomePage() {
           }
           
           .heroAnimation {
-            margin-left: clamp(-2rem, -4vw, -4rem) !important;
-            margin-bottom: clamp(-8rem, -12vh, -10rem) !important;
+            max-width: min(120%, 900px) !important;
+            height: min(calc(100vh - var(--header-height)), 1000px) !important;
+            margin-left: clamp(-1.5rem, -2.5vw, -3rem) !important;
+            margin-bottom: clamp(-9rem, -12vh, -12rem) !important;
           }
           
           .heroAnimationVideo {
-            width: clamp(145%, 160%, 175%) !important;
-            min-height: clamp(850px, 105vh, 1200px) !important;
+            width: clamp(140%, 155%, 170%) !important;
+            max-width: 1100px !important;
+            min-height: clamp(650px, 100vh, 1000px) !important;
+            max-height: 1100px !important;
+            transform: translateX(clamp(-2%, 0%, 1%)) scale(1.15) !important;
           }
         }
         
-        /* Tablet Landscape (768px - 1023px): Start transitioning */
+        /* Tablet Landscape (768px - 1023px): Balanced for tablets */
         @media (min-width: 768px) and (max-width: 1023px) {
           .heroInner {
             grid-template-columns: minmax(340px, 48%) minmax(0, 52%) !important;
@@ -340,14 +372,18 @@ export default function HomePage() {
           }
           
           .heroAnimation {
-            margin-left: clamp(-1.5rem, -3vw, -3rem) !important;
-            margin-bottom: clamp(-7rem, -11vh, -9rem) !important;
+            max-width: min(115%, 750px) !important;
+            height: min(calc(100vh - var(--header-height)), 850px) !important;
+            margin-left: clamp(-1rem, -2vw, -2rem) !important;
+            margin-bottom: clamp(-7rem, -10vh, -10rem) !important;
           }
           
           .heroAnimationVideo {
-            width: clamp(135%, 150%, 165%) !important;
-            min-height: clamp(800px, 102vh, 1150px) !important;
-            transform: translateX(clamp(-2%, 0%, 2%)) !important;
+            width: clamp(130%, 145%, 160%) !important;
+            max-width: 950px !important;
+            min-height: clamp(550px, 95vh, 850px) !important;
+            max-height: 950px !important;
+            transform: translateX(clamp(-2%, 0%, 1%)) scale(1.1) !important;
           }
           
           .heroTextCol {
@@ -402,13 +438,13 @@ export default function HomePage() {
             bottom: 0 !important;
             width: 100% !important;
             height: 100% !important;
+            max-width: none !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
             overflow: hidden !important;
             z-index: 1 !important;
             margin: 0 !important;
-            max-width: none !important;
             grid-column: unset !important;
             pointer-events: none !important;
           }
@@ -421,6 +457,7 @@ export default function HomePage() {
             width: 100vw !important;
             height: 100vh !important;
             max-width: none !important;
+            max-height: none !important;
             min-height: 100vh !important;
             object-fit: cover !important;
             object-position: center !important;

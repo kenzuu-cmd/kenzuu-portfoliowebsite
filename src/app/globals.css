@@ -137,10 +137,77 @@
               width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ============================================
+   BOUNDED VIDEO/ANIMATION SIZING SYSTEM
+   ============================================
+   Core principles for consistent sizing across all screens:
+   
+   1. ALWAYS use max-width AND max-height together
+      - Prevents overflow on large monitors
+      - Creates a "ceiling" for the maximum size
+   
+   2. Use min() to cap values
+      - min(100vh, 900px) = whichever is smaller
+      - Prevents video from becoming too large
+   
+   3. Use max() to set floors
+      - max(50vh, 400px) = whichever is larger
+      - Prevents video from becoming too small
+   
+   4. Use clamp() for the responsive middle
+      - clamp(min, preferred, max)
+      - Scales smoothly between bounds
+   
+   5. NEVER use unbounded percentage widths > 100%
+      - width: 165% will overflow on larger screens
+      - Use max-width: 950px alongside percentages
+*/
+
 /* Ensure video maintains aspect ratio across all viewports */
 @supports (aspect-ratio: 16/9) {
   .heroAnimationVideo {
     aspect-ratio: auto;
+  }
+}
+
+/* Bounded sizing utility classes for videos and animations */
+.bounded-media {
+  /* Default bounded container */
+  width: 100%;
+  max-width: min(100%, 900px);
+  height: auto;
+  max-height: min(100vh, 850px);
+}
+
+.bounded-media--large {
+  max-width: min(100%, 1100px);
+  max-height: min(100vh, 1000px);
+}
+
+.bounded-media--small {
+  max-width: min(100%, 700px);
+  max-height: min(100vh, 650px);
+}
+
+/* Container query support for hero animation */
+@container hero-container (min-width: 1400px) {
+  .heroAnimationVideo {
+    max-width: 1400px !important;
+    max-height: 1300px !important;
+  }
+}
+
+@container hero-container (max-width: 1399px) and (min-width: 1100px) {
+  .heroAnimationVideo {
+    max-width: 1200px !important;
+    max-height: 1100px !important;
+  }
+}
+
+@container hero-container (max-width: 1099px) and (min-width: 768px) {
+  .heroAnimationVideo {
+    max-width: 950px !important;
+    max-height: 950px !important;
   }
 }
 
