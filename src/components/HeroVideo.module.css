@@ -1,0 +1,87 @@
+/**
+ * HeroVideo Component Styles
+ * 
+ * Critical styles that prevent letterboxing/zoom-out issues:
+ * 1. Container: overflow: hidden prevents video from breaking bounds
+ * 2. Video: object-fit: cover ensures video always fills container
+ * 3. Video: width/height 100% makes video responsive to container size
+ * 4. pointer-events: none makes video non-interactive (decorative)
+ */
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* Prevents any video overflow that causes letterboxing */
+  contain: layout style paint;
+}
+
+.video {
+  /* Fill the entire container */
+  width: 100%;
+  height: 100%;
+  
+  /* CRITICAL: Cover prevents letterboxing/zoom-out */
+  object-fit: cover;
+  
+  /* Default position (can be overridden via inline style prop) */
+  object-position: center;
+  
+  /* Video is decorative, not interactive */
+  pointer-events: none;
+  
+  /* Remove any default spacing */
+  display: block;
+  margin: 0;
+  padding: 0;
+  
+  /* Prevent selection/drag */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  
+  /* Smooth rendering on all devices */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  
+  /* Hardware acceleration for smoother playback */
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Fallback image (if video fails to load) */
+.fallbackImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Ensure proper rendering in Safari/WebKit browsers */
+@supports (-webkit-appearance: none) {
+  .video {
+    -webkit-transform: translateZ(0);
+  }
+}
+
+/* Older browser fallback (IE11, older Edge) */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .video {
+    /* IE11 doesn't support object-fit, but this helps maintain aspect */
+    max-width: none;
+    max-height: none;
+    min-width: 100%;
+    min-height: 100%;
+  }
+}
+
+/* Performance optimization for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .video {
+    will-change: auto;
+  }
+}
