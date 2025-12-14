@@ -189,15 +189,15 @@ export default function HomePage() {
               display: 'flex',
               alignItems: 'flex-end',
               justifyContent: 'center',
-              /* Responsive container with aspect-ratio preservation */
+              /* Responsive container - larger to match reference image */
               width: '100%',
-              maxWidth: 'min(100%, 800px)',
+              maxWidth: 'min(160%, 1300px)',
               height: 'auto',
-              aspectRatio: '9 / 16',
+              minHeight: 'clamp(750px, 100vh, 1200px)',
               overflow: 'visible',
               gridColumn: '2',
-              marginLeft: 'clamp(-1rem, -2vw, -3rem)',
-              marginBottom: 'clamp(-8rem, -10vh, -12rem)',
+              marginLeft: 'clamp(-3rem, -4vw, -6rem)',
+              marginBottom: 'clamp(-6rem, -8vh, -10rem)',
             }}
           >
             {/* Gradient backdrop behind animation - subtle white/blue glow */}
@@ -225,17 +225,16 @@ export default function HomePage() {
               className="heroAnimationVideo"
               style={{
                 position: 'relative',
-                /* Consistent sizing using viewport-based units with constraints */
-                width: '100%',
-                maxWidth: '800px',
+                /* Larger sizing to match reference image prominence */
+                width: 'clamp(150%, 165%, 180%)',
+                maxWidth: '1400px',
                 height: 'auto',
-                /* Maintain aspect ratio and natural sizing */
-                aspectRatio: '9 / 16',
+                minHeight: 'clamp(750px, 100vh, 1200px)',
                 objectFit: 'contain',
-                objectPosition: 'center bottom',
-                /* Simple transform without aggressive scaling */
-                transform: 'translateY(0)',
-                transformOrigin: 'center bottom',
+                objectPosition: 'center center',
+                /* Moderate scaling for prominence without excessive zoom */
+                transform: 'translateX(clamp(-2%, 0%, 1%)) translateY(-5%) scale(1.16)',
+                transformOrigin: 'center center',
                 zIndex: 1,
               }}
             >
@@ -296,13 +295,17 @@ export default function HomePage() {
           }
           
           .heroAnimation {
-            max-width: min(100%, 900px) !important;
-            margin-left: clamp(-1.5rem, -2.5vw, -3.5rem) !important;
-            margin-bottom: clamp(-10rem, -12vh, -14rem) !important;
+            max-width: min(165%, 1400px) !important;
+            minHeight: clamp(800px, 105vh, 1300px) !important;
+            margin-left: clamp(-3.5rem, -4.5vw, -6.5rem) !important;
+            margin-bottom: clamp(-7rem, -9vh, -12rem) !important;
           }
           
           .heroAnimationVideo {
-            max-width: 900px !important;
+            width: clamp(155%, 170%, 185%) !important;
+            maxWidth: 1500px !important;
+            minHeight: clamp(800px, 105vh, 1300px) !important;
+            transform: translateX(clamp(-2%, 0%, 1%)) translateY(-5%) scale(1.18) !important;
           }
         }
 
@@ -315,13 +318,17 @@ export default function HomePage() {
           }
           
           .heroAnimation {
-            max-width: min(100%, 800px) !important;
-            margin-left: clamp(-1rem, -2vw, -3rem) !important;
-            margin-bottom: clamp(-8rem, -10vh, -12rem) !important;
+            max-width: min(160%, 1300px) !important;
+            minHeight: clamp(750px, 100vh, 1200px) !important;
+            margin-left: clamp(-3rem, -4vw, -6rem) !important;
+            margin-bottom: clamp(-6rem, -8vh, -10rem) !important;
           }
           
           .heroAnimationVideo {
-            max-width: 800px !important;
+            width: clamp(150%, 165%, 180%) !important;
+            maxWidth: 1400px !important;
+            minHeight: clamp(750px, 100vh, 1200px) !important;
+            transform: translateX(clamp(-2%, 0%, 1%)) translateY(-5%) scale(1.16) !important;
           }
         }
         
@@ -335,13 +342,17 @@ export default function HomePage() {
           }
           
           .heroAnimation {
-            max-width: min(100%, 700px) !important;
-            margin-left: clamp(-0.75rem, -1.5vw, -2.5rem) !important;
-            margin-bottom: clamp(-7rem, -9vh, -11rem) !important;
+            max-width: min(150%, 1150px) !important;
+            minHeight: clamp(700px, 95vh, 1100px) !important;
+            margin-left: clamp(-2.5rem, -3.5vw, -5rem) !important;
+            margin-bottom: clamp(-5rem, -7vh, -9rem) !important;
           }
           
           .heroAnimationVideo {
-            max-width: 700px !important;
+            width: clamp(145%, 160%, 175%) !important;
+            maxWidth: 1300px !important;
+            minHeight: clamp(700px, 95vh, 1100px) !important;
+            transform: translateX(clamp(-2%, 0%, 1%)) translateY(-5%) scale(1.13) !important;
           }
         }
         
@@ -355,13 +366,17 @@ export default function HomePage() {
           }
           
           .heroAnimation {
-            max-width: min(100%, 600px) !important;
-            margin-left: clamp(-0.5rem, -1vw, -2rem) !important;
-            margin-bottom: clamp(-6rem, -8vh, -10rem) !important;
+            max-width: min(140%, 1000px) !important;
+            minHeight: clamp(650px, 90vh, 1000px) !important;
+            margin-left: clamp(-2rem, -3vw, -4rem) !important;
+            margin-bottom: clamp(-4rem, -6vh, -8rem) !important;
           }
           
           .heroAnimationVideo {
-            max-width: 600px !important;
+            width: clamp(140%, 155%, 170%) !important;
+            maxWidth: 1150px !important;
+            minHeight: clamp(650px, 90vh, 1000px) !important;
+            transform: translateX(clamp(-2%, 0%, 1%)) translateY(-5%) scale(1.1) !important;
           }
           
           .heroTextCol {
