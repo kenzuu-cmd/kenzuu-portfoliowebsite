@@ -22,7 +22,7 @@ export default function HomePage() {
         alignItems: 'center',
       }}
     >
-      {/* Hero Inner Container - Responsive Grid */}
+      {/* Hero content container with responsive grid layout */}
       <div 
         className="heroInner"
         style={{
@@ -41,7 +41,7 @@ export default function HomePage() {
           paddingBottom: 'clamp(2rem, 4vh, 4rem)',
         }}
       >
-        {/* LEFT COLUMN: Text Content - Aligned with header brand "Kenzuu" */}
+        {/* Left column: Text content and CTAs */}
         <div
           className="heroTextCol"
           style={{
@@ -56,7 +56,7 @@ export default function HomePage() {
           }}
         >
           <HeroAnimation>
-            {/* Construction banner */}
+            {/* Development status banner */}
             <div 
               className="inline-block px-6 py-2.5 rounded-lg" 
               style={{ 
@@ -72,7 +72,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Welcome tagline */}
+            {/* Portfolio tagline */}
             <p 
               className="text-sm uppercase font-semibold heroTagline" 
               style={{ 
@@ -83,14 +83,14 @@ export default function HomePage() {
               Welcome to my portfolio
             </p>
 
-            {/* Brand name heading - H1 for SEO */}
+            {/* Main heading with brand name */}
             <h1 
               className="font-display font-black uppercase heroTitle"
             >
               {personalInfo.name}
             </h1>
 
-            {/* Description */}
+            {/* Hero description */}
             <p 
               className="leading-relaxed heroDescription" 
               style={{ 
@@ -104,7 +104,7 @@ export default function HomePage() {
               {personalInfo.heroDescription}
             </p>
 
-            {/* CTA Buttons */}
+            {/* Primary and secondary action buttons */}
             <div className="flex flex-col sm:flex-row gap-4 heroButtonGroup">
               <Link
                 href="/work"
@@ -180,7 +180,7 @@ export default function HomePage() {
           </HeroAnimation>
         </div>
 
-        {/* RIGHT AREA: Animation container with gradient backdrop and alpha transparency */}
+        {/* Right column: Hero video/animation */}
         <HeroAnimation>
           <div 
             className="heroAnimation" 
@@ -189,18 +189,18 @@ export default function HomePage() {
               display: 'flex',
               alignItems: 'flex-end',
               justifyContent: 'center',
-              /* Responsive container - larger to match reference image */
+              /* Viewport-responsive container */
               width: '100%',
-              maxWidth: 'min(160%, 1300px)',
+              maxWidth: 'min(90vw, 1200px)',
               height: 'auto',
-              minHeight: 'clamp(750px, 100vh, 1200px)',
+              minHeight: 'min(85vh, 950px)',
               overflow: 'visible',
               gridColumn: '2',
-              marginLeft: 'clamp(-3rem, -4vw, -6rem)',
-              marginBottom: 'clamp(-6rem, -8vh, -10rem)',
+              marginLeft: 'clamp(-1.5rem, -2.5vw, -3.5rem)',
+              marginBottom: 'clamp(-4rem, -5vh, -6rem)',
             }}
           >
-            {/* Gradient backdrop behind animation - subtle white/blue glow */}
+            {/* Gradient backdrop effect */}
             <div
               className="heroAnimationBackdrop"
               style={{
@@ -225,16 +225,16 @@ export default function HomePage() {
               className="heroAnimationVideo"
               style={{
                 position: 'relative',
-                /* Larger sizing to match reference image prominence */
-                width: 'clamp(150%, 165%, 180%)',
-                maxWidth: '1400px',
+                /* Viewport-based responsive scaling */
+                width: '100%',
+                maxWidth: 'min(90vw, 1200px)',
                 height: 'auto',
-                minHeight: 'clamp(750px, 100vh, 1200px)',
+                minHeight: 'min(85vh, 950px)',
                 objectFit: 'contain',
-                objectPosition: 'center center',
-                /* Moderate scaling for prominence without excessive zoom */
-                transform: 'translateX(clamp(-2%, 0%, 1%)) translateY(-5%) scale(1.16)',
-                transformOrigin: 'center center',
+                objectPosition: 'center bottom',
+                /* Scale for visual prominence */
+                transform: 'scale(1.15)',
+                transformOrigin: 'center bottom',
                 zIndex: 1,
               }}
             >
@@ -245,9 +245,9 @@ export default function HomePage() {
         </HeroAnimation>
       </div>
 
-      {/* Responsive layout and light mode styles */}
+      {/* Responsive breakpoints and theme overrides */}
       <style jsx>{`
-        /* Base heroTitle styles */
+        /* Hero title base styles */
         .heroTitle {
           font-size: clamp(2.8rem, 6.5vw, 4.8rem);
           line-height: 1.05;
@@ -260,7 +260,7 @@ export default function HomePage() {
           margin-bottom: clamp(1.25rem, 3vh, 1.75rem);
         }
 
-        /* Light mode overrides - title gradient and backdrop */
+        /* Light mode theme adjustments */
         @media (prefers-color-scheme: light) {
           .heroTitle {
             background: none !important;
@@ -278,15 +278,13 @@ export default function HomePage() {
         }
 
         /* ============================================
-           BOUNDED RESPONSIVE VIDEO/ANIMATION SYSTEM
+           RESPONSIVE VIDEO SCALING SYSTEM
            ============================================
-           Key principles:
-           1. Use consistent aspect-ratio and max-width constraints
-           2. This prevents overflow and zooming on different screen sizes
-           3. Works naturally on 16:9, 16:10, and other aspect ratios
+           Viewport-based sizing with pixel constraints
+           for consistent cross-device appearance
         */
 
-        /* Extra Large Desktops (1600px+): Larger but bounded */
+        /* Extra large desktops (1600px+) */
         @media (min-width: 1600px) {
           .heroInner {
             grid-template-columns: minmax(500px, 45%) minmax(0, 55%) !important;
@@ -295,21 +293,21 @@ export default function HomePage() {
           }
           
           .heroAnimation {
-            max-width: min(165%, 1400px) !important;
-            minHeight: clamp(800px, 105vh, 1300px) !important;
-            margin-left: clamp(-3.5rem, -4.5vw, -6.5rem) !important;
-            margin-bottom: clamp(-7rem, -9vh, -12rem) !important;
+            max-width: min(95vw, 1300px) !important;
+            minHeight: min(90vh, 1050px) !important;
+            margin-left: clamp(-2rem, -3vw, -4rem) !important;
+            margin-bottom: clamp(-5rem, -6vh, -8rem) !important;
           }
           
           .heroAnimationVideo {
-            width: clamp(155%, 170%, 185%) !important;
-            maxWidth: 1500px !important;
-            minHeight: clamp(800px, 105vh, 1300px) !important;
-            transform: translateX(clamp(-2%, 0%, 1%)) translateY(-5%) scale(1.18) !important;
+            width: 100% !important;
+            maxWidth: min(95vw, 1300px) !important;
+            minHeight: min(90vh, 1050px) !important;
+            transform: scale(1.18) !important;
           }
         }
 
-        /* Large Desktop (1200px - 1599px): Standard size */
+        /* Large desktops (1200px - 1599px) */
         @media (min-width: 1200px) and (max-width: 1599px) {
           .heroInner {
             grid-template-columns: minmax(440px, 46%) minmax(0, 54%) !important;
@@ -318,21 +316,21 @@ export default function HomePage() {
           }
           
           .heroAnimation {
-            max-width: min(160%, 1300px) !important;
-            minHeight: clamp(750px, 100vh, 1200px) !important;
-            margin-left: clamp(-3rem, -4vw, -6rem) !important;
-            margin-bottom: clamp(-6rem, -8vh, -10rem) !important;
+            max-width: min(90vw, 1200px) !important;
+            minHeight: min(85vh, 950px) !important;
+            margin-left: clamp(-1.5rem, -2.5vw, -3.5rem) !important;
+            margin-bottom: clamp(-4rem, -5vh, -6rem) !important;
           }
           
           .heroAnimationVideo {
-            width: clamp(150%, 165%, 180%) !important;
-            maxWidth: 1400px !important;
-            minHeight: clamp(750px, 100vh, 1200px) !important;
-            transform: translateX(clamp(-2%, 0%, 1%)) translateY(-5%) scale(1.16) !important;
+            width: 100% !important;
+            maxWidth: min(90vw, 1200px) !important;
+            minHeight: min(85vh, 950px) !important;
+            transform: scale(1.15) !important;
           }
         }
         
-        /* Standard Desktop (1024px - 1199px): Slightly reduced */
+        /* Standard desktops (1024px - 1199px) */
         @media (min-width: 1024px) and (max-width: 1199px) {
           .heroInner {
             grid-template-columns: minmax(400px, 47%) minmax(0, 53%) !important;
@@ -342,21 +340,21 @@ export default function HomePage() {
           }
           
           .heroAnimation {
-            max-width: min(150%, 1150px) !important;
-            minHeight: clamp(700px, 95vh, 1100px) !important;
-            margin-left: clamp(-2.5rem, -3.5vw, -5rem) !important;
-            margin-bottom: clamp(-5rem, -7vh, -9rem) !important;
+            max-width: min(85vw, 1100px) !important;
+            minHeight: min(80vh, 900px) !important;
+            margin-left: clamp(-1rem, -2vw, -3rem) !important;
+            margin-bottom: clamp(-3rem, -4vh, -5rem) !important;
           }
           
           .heroAnimationVideo {
-            width: clamp(145%, 160%, 175%) !important;
-            maxWidth: 1300px !important;
-            minHeight: clamp(700px, 95vh, 1100px) !important;
-            transform: translateX(clamp(-2%, 0%, 1%)) translateY(-5%) scale(1.13) !important;
+            width: 100% !important;
+            maxWidth: min(85vw, 1100px) !important;
+            minHeight: min(80vh, 900px) !important;
+            transform: scale(1.12) !important;
           }
         }
         
-        /* Tablet Landscape (768px - 1023px): Balanced for tablets */
+        /* Tablet landscape (768px - 1023px) */
         @media (min-width: 768px) and (max-width: 1023px) {
           .heroInner {
             grid-template-columns: minmax(340px, 48%) minmax(0, 52%) !important;
@@ -366,17 +364,17 @@ export default function HomePage() {
           }
           
           .heroAnimation {
-            max-width: min(140%, 1000px) !important;
-            minHeight: clamp(650px, 90vh, 1000px) !important;
-            margin-left: clamp(-2rem, -3vw, -4rem) !important;
-            margin-bottom: clamp(-4rem, -6vh, -8rem) !important;
+            max-width: min(80vw, 950px) !important;
+            minHeight: min(75vh, 800px) !important;
+            margin-left: clamp(-0.75rem, -1.5vw, -2.5rem) !important;
+            margin-bottom: clamp(-2rem, -3vh, -4rem) !important;
           }
           
           .heroAnimationVideo {
-            width: clamp(140%, 155%, 170%) !important;
-            maxWidth: 1150px !important;
-            minHeight: clamp(650px, 90vh, 1000px) !important;
-            transform: translateX(clamp(-2%, 0%, 1%)) translateY(-5%) scale(1.1) !important;
+            width: 100% !important;
+            maxWidth: min(80vw, 950px) !important;
+            minHeight: min(75vh, 800px) !important;
+            transform: scale(1.08) !important;
           }
           
           .heroTextCol {
@@ -384,7 +382,7 @@ export default function HomePage() {
           }
         }
         
-        /* Tablet & Mobile (≤960px): Video as background layer with content overlay */
+        /* Tablet and mobile devices (≤960px) */
         @media (max-width: 960px) {
           .hero {
             height: 100vh !important;
@@ -416,13 +414,13 @@ export default function HomePage() {
             max-width: 640px !important;
           }
           
-          /* Center buttons on mobile/tablet */
+          /* Center action buttons */
           .heroButtonGroup {
             justify-content: center !important;
             width: 100% !important;
           }
           
-          /* Video becomes absolute positioned full-screen background */
+          /* Video as full-screen background */
           .heroAnimation {
             position: absolute !important;
             top: 0 !important;
@@ -460,13 +458,13 @@ export default function HomePage() {
             aspect-ratio: unset !important;
           }
           
-          /* Hide backdrop on mobile/tablet */
+          /* Hide gradient backdrop on small screens */
           .heroAnimationBackdrop {
             display: none !important;
           }
         }
         
-        /* Tablet Landscape (768px - 960px): Slightly larger text */
+        /* Tablet landscape text adjustments (768px - 960px) */
         @media (min-width: 768px) and (max-width: 960px) {
           .heroInner {
             padding: 3rem 2.5rem !important;
@@ -481,7 +479,7 @@ export default function HomePage() {
           }
         }
         
-        /* Mobile Landscape & Portrait (480px - 767px): Medium text */
+        /* Mobile landscape and portrait (480px - 767px) */
         @media (min-width: 480px) and (max-width: 767px) {
           .heroInner {
             padding: 2.5rem 2rem !important;
@@ -500,7 +498,7 @@ export default function HomePage() {
           }
         }
 
-        /* Small Mobile (<480px): Compact text */
+        /* Small mobile devices (<480px) */
         @media (max-width: 479px) {
           .heroInner {
             padding: 2rem 1.5rem !important;
@@ -520,7 +518,7 @@ export default function HomePage() {
           }
         }
 
-        /* Respect reduced motion preference */
+        /* Accessibility: Reduced motion preference */
         @media (prefers-reduced-motion: reduce) {
           .heroAnimationVideo {
             animation: none !important;
